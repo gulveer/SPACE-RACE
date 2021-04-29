@@ -34,7 +34,7 @@ class Ground {
     }
 
     show() {
-        fill(82, 30, 0);
+        fill("gray");
         noStroke();
 
         beginShape();
@@ -52,7 +52,7 @@ class Ground {
         pop();
 
         // Grass
-        stroke(0, 205, 0);
+        stroke("black");
         strokeWeight(this.grassThickness * 2);
 
         for (var i = 0; i < this.vectors.length; i++) {

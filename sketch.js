@@ -1,3 +1,7 @@
+const Engine = Matter.Engine;
+const World = Matter.World;
+const Bodies = Matter.Bodies;
+
 var Vec2 = Box2D.Common.Math.b2Vec2;
 var b2BodyDef = Box2D.Dynamics.b2BodyDef;
 var b2Body = Box2D.Dynamics.b2Body;
@@ -66,6 +70,10 @@ var PERSON_MASK = (GRASS_CATEGORY);
 
 var resetCounter = 120;
 var reset = false;
+var bgImage;
+var astroid1;
+var astroid2;
+
 
 listener.BeginContact = function(contact) {
     if (contact.GetFixtureA().GetBody() == car.person.head.body) {
@@ -99,9 +107,11 @@ function setup() {
   window.canvas = createCanvas(1000, 500);
  // canvas.parent("canvas");
   frameRate(30);
-  headSprite = loadImage("images/head.png");
+  bgImage = loadImage("images/CAR_BACKGROUND-2.png");
+  headSprite = loadImage("images/MAN.png");
+  //headSprite.scale = 2;
   
-  //backgroundImage = loadImage("images/CAR_BACKGROUND-2.jpg");
+  
   
   carSprite = loadImage("images/TEST_CAR.png");
   wheelSprite = loadImage("images/wheel.png");
@@ -111,8 +121,14 @@ function setup() {
   grounds.push(new Ground());
 
   world.SetContactListener(listener);
-
-
+  
+  //if(frameCount%150==0){
+    //for(var i = 0; i<maxAstroid; i++){
+    //astroid.push(new Astroid(random(0,800),random(0,500)))
+    //}
+   // }
+   astroid1 = new Astroid(100,100);
+   astroid2 = new Astroid(200,100);
   // var bodyDef2 = new b2BodyDef();
   // bodyDef2.type = b2StaticBody;
   // bodyDef2.position.x = 0; //canvas.width / 2 / SCALE;
@@ -165,12 +181,22 @@ function setup() {
 
 
 function draw() {
-  background("black");
+    //bgImage = loadImage("images/CAR_BACKGROUND-2.png");
+    background("black");
   world.Step(1 / 30, 10, 10);
 
   for (var i of wheels) {
       i.show();
   }
+
+   //for(var i = 0; i<maxAstroid; i++){
+   //astroid[i].show();
+   //astroid[i].updateY();
+
+  astroid1.show();
+  astroid2.show();
+
+   //}
 
   carx = car.getXPosition()
   // Create a new ground if we arrive at the end of the last one
